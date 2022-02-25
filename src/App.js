@@ -1,32 +1,61 @@
 import React, { useState } from 'react';
+import './App.css';
 
 function App() {
-    const [result, setResult] = useState(0);
+    const [result, setResult] = useState('');
+
+    const handleClick = (e) => {
+        console.log(result)
+        if (result === 'Error') {
+            console.log('HOLA')
+            setResult('');
+        }
+        setResult(result.concat(e.target.value));
+    }
+
+    function backspace() {
+        setResult(result.slice(0, result.length - 1));
+    }
+    function calculate() {
+        try {
+            setResult(eval(result).toString());
+        } catch (error) {
+            setResult('Error');
+        }
+    }
     return (
         <>
-            <h1>Hola Emilio...!</h1>
-            <form>
-                <input type='text' value={result} />
-            </form>
-            <div className='keypad'>
-                <button>1</button>
-                <button>2</button>
-                <button>3</button>
-                <button>4</button>
-                <button>5</button>
-                <button>6</button>
-                <button>7</button>
-                <button>8</button>
-                <button>9</button>
-                <button>0</button>
-                <button>&divide;</button>
-                <button>&ndash;</button>
-                <button>+</button>
-                <button>&times;</button>
-                <button>.</button>
-                <button>=</button>
-                <button>C</button>
-                <button>Clear</button>
+            <div className='container'>
+                <h1>Hola Emilio...!</h1>
+                <form>
+                    <input type='text' value={result} />
+                </form>
+                <div className='keypad'>
+                    <button onClick={backspace}>C</button>
+
+                    <button onClick={handleClick} value='/'>&divide;</button>
+                    <button onClick={handleClick} value='*'>&times;</button>
+                    <button onClick={handleClick} value='-'>&ndash;</button>
+
+                    <button onClick={handleClick} value='7'>7</button>
+                    <button onClick={handleClick} value='8'>8</button>
+                    <button onClick={handleClick} value='9'>9</button>
+
+                    <button onClick={handleClick} value='4'>4</button>
+                    <button onClick={handleClick} value='5'>5</button>
+                    <button onClick={handleClick} value='6'>6</button>
+
+                    <button onClick={handleClick} value='1'>1</button>
+                    <button onClick={handleClick} value='2'>2</button>
+                    <button onClick={handleClick} value='3'>3</button>
+                    <button onClick={() => setResult('')}>Clear</button>
+                    <button onClick={handleClick} id='zero' value='0'>0</button>
+                    <button onClick={handleClick} value='.'>.</button>
+                    <button onClick={calculate} value='=' id='equal'>=</button>
+                    <button onClick={handleClick} value='+' id='plus'>+</button>
+
+                </div>
+
             </div>
         </>
     )
