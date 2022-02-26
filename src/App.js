@@ -5,12 +5,9 @@ function App() {
     const [result, setResult] = useState('');
 
     const handleClick = (e) => {
-        console.log(result)
-        if (result === 'Error') {
-            console.log('HOLA')
-            setResult('');
+        if (result.length < 12) {
+            setResult(result.concat(e.target.value));
         }
-        setResult(result.concat(e.target.value));
     }
 
     function backspace() {
@@ -26,10 +23,8 @@ function App() {
     return (
         <>
             <div className='container'>
-                <h1>Hola Emilio...!</h1>
-                <form>
-                    <input type='text' value={result} />
-                </form>
+                <h1 id='title'>Calculator</h1>
+                <input id='display' type='text' value={result} onChange={setResult} />
                 <div className='keypad'>
                     <button onClick={backspace}>C</button>
 
