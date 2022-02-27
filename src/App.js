@@ -5,7 +5,7 @@ function App() {
     const [result, setResult] = useState('');
 
     const handleClick = (e) => {
-        if (result.length < 12) {
+        if (result.length < 11) {
             setResult(result.concat(e.target.value));
         }
     }
@@ -23,7 +23,6 @@ function App() {
     return (
         <>
             <div className='container'>
-                <h1 id='title'>Calculator</h1>
                 <input id='display' type='text' value={result} onChange={setResult} />
                 <div className='keypad'>
                     <button onClick={backspace}>C</button>
